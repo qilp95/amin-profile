@@ -243,51 +243,9 @@
             .nav-links { display: none; }
             .hero h1 { font-size: 3rem; }
         }
-        @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    50% { transform: translate(-1px, 2px) rotate(1deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-
-.doomsday-active {
-    animation: shake 0.2s infinite !important;
-    filter: sepia(1) saturate(5) hue-rotate(-50deg) !important;
-}
-
-.fall-down {
-    transition: transform 2s cubic-bezier(0.47, 0, 0.745, 0.715), opacity 2s !important;
-    transform: translateY(1000px) rotate(45deg) !important;
-    opacity: 0 !important;
-    pointer-events: none;
-}
     </style>
 </head>
 <body>
-    <div id="doomsday-panel" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <button id="doom-btn" class="glass" style="
-        padding: 10px 20px; 
-        color: #ff4d4d; 
-        border: 1px solid #ff4d4d; 
-        cursor: pointer;
-        font-family: 'Space Grotesk';
-        font-weight: bold;
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-    ">LAUNCH DOOMSDAY</button>
-</div>
-
-<div id="doom-overlay" style="
-    position: fixed; 
-    top: 0; left: 0; width: 100%; height: 100%; 
-    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%);
-    z-index: 9998;
-    display: none;
-    pointer-events: none;
-"></div>
 
     <div class="neural-background"></div>
 
@@ -397,20 +355,19 @@
     </div>
 
     <div class="music-player glass" id="musicPlayer">
-    <button class="play-btn" id="playBtn">
-        <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
-    </button>
-    <div class="track-info">
-        <div class="track-name">LUZ ROJA</div>
-        <div class="audio-visualizer">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <button class="play-btn" id="playBtn">
+            <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="track-info">
+            <div class="track-name">· LUZ ROJA ·</div>
+            <div class="audio-visualizer">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
         </div>
+        <audio id="bgMusic" loop>
+            <source src="musik.mp3" type="audio/mpeg">
+        </audio>
     </div>
-    <audio id="bgMusic" loop>
-        <source src="musik.mp3" type="audio/mpeg">
-    </audio>
-</div>
-
 
     <div class="glass" style="padding: 60px 20px; text-align: center; border-style: dashed; border-width: 2px;">
         <div style="margin-bottom: 30px;">
@@ -483,4 +440,56 @@
                     card.classList.add('active');
                     // Matikan musik jika video dimainkan agar suara tidak tabrakan
                     music.pause();
-                   
+                    musicPlayer.classList.remove('playing');
+                    playIcon.innerHTML = '<path d="M8 5v14l11-7z" fill="black"/>';
+                } else {
+                    video.pause();
+                    card.classList.remove('active');
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            const size = Math.random() * 3;
+            particle.style.cssText = `
+                position: fixed;
+                width: ${size}px;
+                height: ${size}px;
+                background: ${Math.random() > 0.5 ? '#00f3ff' : '#e0a3ff'};
+                left: ${Math.random() * 100}vw;
+                top: 110vh;
+                opacity: ${Math.random()};
+                z-index: -1;
+                pointer-events: none;
+                border-radius: 50%;
+            `;
+            document.body.appendChild(particle);
+
+            particle.animate([
+                { transform: 'translateY(0)', opacity: 1 },
+                { transform: `translateY(-110vh) translateX(${Math.random() * 100 - 50}px)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 4000 + 3000,
+                easing: 'linear'
+            }).onfinish = () => particle.remove();
+        }
+        setInterval(createParticle, 150);
+
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nama = document.getElementById('name').value;
+            const pesan = document.getElementById('message').value;
+            const nomorWA = "6281392463081";
+            const teksPesan = `Halo, saya ingin bertanya.%0A%0A*Nama:* ${nama}%0A*Pesan:* ${pesan}`;
+            const urlWA = `https://wa.me/${nomorWA}?text=${teksPesan}`;
+            window.open(urlWA, '_blank');
+        });
+    </script>
+</body>
+</html>
