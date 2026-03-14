@@ -397,19 +397,20 @@
     </div>
 
     <div class="music-player glass" id="musicPlayer">
-        <button class="play-btn" id="playBtn">
-            <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <div class="track-info">
-            <div class="track-name">AL NACER! · Sayfalse · Nulteex</div>
-            <div class="audio-visualizer">
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-            </div>
+    <button class="play-btn" id="playBtn">
+        <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="track-info">
+        <div class="track-name">LUZ ROJA</div>
+        <div class="audio-visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
-        <audio id="bgMusic" loop>
-            <source src="musik.mp3" type="audio/mpeg">
-        </audio>
     </div>
+    <audio id="bgMusic" loop>
+        <source src="musik.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
 
     <div class="glass" style="padding: 60px 20px; text-align: center; border-style: dashed; border-width: 2px;">
         <div style="margin-bottom: 30px;">
@@ -482,94 +483,4 @@
                     card.classList.add('active');
                     // Matikan musik jika video dimainkan agar suara tidak tabrakan
                     music.pause();
-                    musicPlayer.classList.remove('playing');
-                    playIcon.innerHTML = '<path d="M8 5v14l11-7z" fill="black"/>';
-                } else {
-                    video.pause();
-                    card.classList.remove('active');
-                }
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-
-        function createParticle() {
-            const particle = document.createElement('div');
-            const size = Math.random() * 3;
-            particle.style.cssText = `
-                position: fixed;
-                width: ${size}px;
-                height: ${size}px;
-                background: ${Math.random() > 0.5 ? '#00f3ff' : '#e0a3ff'};
-                left: ${Math.random() * 100}vw;
-                top: 110vh;
-                opacity: ${Math.random()};
-                z-index: -1;
-                pointer-events: none;
-                border-radius: 50%;
-            `;
-            document.body.appendChild(particle);
-
-            particle.animate([
-                { transform: 'translateY(0)', opacity: 1 },
-                { transform: `translateY(-110vh) translateX(${Math.random() * 100 - 50}px)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 4000 + 3000,
-                easing: 'linear'
-            }).onfinish = () => particle.remove();
-        }
-        setInterval(createParticle, 150);
-
-        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nama = document.getElementById('name').value;
-            const pesan = document.getElementById('message').value;
-            const nomorWA = "6281392463081";
-            const teksPesan = `Halo, saya ingin bertanya.%0A*Nama:* ${nama}%0A*Pesan:* ${pesan}`;
-            const urlWA = `https://wa.me/${nomorWA}?text=${teksPesan}`;
-            window.open(urlWA, '_blank');
-        });
-        const doomBtn = document.getElementById('doom-btn');
-const doomOverlay = document.getElementById('doom-overlay');
-const body = document.body;
-
-doomBtn.addEventListener('click', () => {
-    if (confirm("System override detected. Are you sure you want to initiate Doomsday Protocol?")) {
-        // 1. Aktifkan Overlay Merah & Guncangan
-        doomOverlay.style.display = 'block';
-        body.classList.add('doomsday-active');
-        doomBtn.innerText = "PROTOCOL INITIATED...";
-        doomBtn.style.background = "#ff4d4d";
-        doomBtn.style.color = "black";
-
-        // 2. Efek Suara (Opsional - Jika ada file suara ledakan)
-        // const explosion = new Audio('explosion.mp3'); 
-        // explosion.play();
-
-        // 3. Kehancuran Elemen secara bertahap
-        const elements = document.querySelectorAll('section, header, .info-card');
-        elements.forEach((el, index) => {
-            setTimeout(() => {
-                el.classList.add('fall-down');
-            }, index * 300); // Elemen jatuh satu per satu
-        });
-
-        // 4. Reset atau Pesan Terakhir
-        setTimeout(() => {
-            body.innerHTML = `
-                <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:black; color:red; font-family:monospace;">
-                    <h1 style="font-size:3rem;">CONNECTION LOST</h1>
-                    <p>Muhammad Fatkhul Amin's portfolio has been purged.</p>
-                    <button onclick="location.reload()" style="margin-top:20px; padding:10px; cursor:pointer; background:none; border:1px solid red; color:red;">REBOOT SYSTEM</button>
-                </div>
-            `;
-            body.classList.remove('doomsday-active');
-        }, elements.length * 300 + 2000);
-    }
-});
-    </script>
-</body>
-</html>
+                   
