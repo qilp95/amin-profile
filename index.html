@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Muhammad Fatkhul Amin</title>
+    <title>Archive | Muhammad Fatkhul Amin</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +38,18 @@
                 radial-gradient(circle at 20% 30%, rgba(123, 31, 162, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(0, 243, 255, 0.1) 0%, transparent 40%),
                 #050505;
+        }
+
+        /* MATRIX CANVAS STYLE */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            opacity: 0.15; 
+            pointer-events: none;
         }
 
         .neural-background::after {
@@ -75,6 +87,33 @@
             width: 80%;
         }
 
+        /* --- Real-Time Monitor Bar --- */
+        .system-monitor-bar {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 20px;
+            border-radius: 12px;
+            z-index: 999;
+            font-family: monospace;
+            font-size: 0.75rem;
+            transition: 0.5s;
+        }
+
+        header.scrolled + .system-monitor-bar {
+            top: 80px;
+            width: 80%;
+        }
+
+        .monitor-item { display: flex; gap: 8px; align-items: center; }
+        .monitor-item .label { color: var(--accent); font-weight: bold; letter-spacing: 1px; }
+        .monitor-item .value { color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+
         nav { display: flex; justify-content: space-between; align-items: center; }
         .logo { 
             font-family: 'Space Grotesk', sans-serif;
@@ -95,7 +134,7 @@
         .hero { 
             min-height: 100vh; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; text-align: center;
-            padding: 120px 20px 60px;
+            padding: 160px 20px 60px;
         }
         
         .hero-tag {
@@ -109,6 +148,42 @@
             margin-bottom: 25px; font-weight: 800;
             background: linear-gradient(to right, #fff, var(--primary), var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Bulletin / Journalism Style --- */
+        .news-item {
+            border-left: 3px solid var(--accent);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .news-item:hover {
+            background: rgba(0, 243, 255, 0.05);
+            transform: translateX(5px);
+        }
+        .news-tag {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .blink-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--accent); }
+            50% { opacity: 0.3; }
         }
 
         /* --- Music Player Styles --- */
@@ -178,38 +253,83 @@
             box-shadow: 0 0 30px rgba(224, 163, 255, 0.4);
         }
 
+        /* --- GIF Player Feature --- */
+        .gif-display-container {
+            margin-top: 40px;
+            margin-bottom: 60px; /* Tambah margin bawah */
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .gif-frame {
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+        .gif-frame img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        .gif-caption {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-family: 'Space Grotesk';
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Tools Grid --- */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        .tool-card {
+            padding: 25px;
+            text-align: center;
+            transition: 0.3s;
+            text-decoration: none;
+            border: 1px solid var(--glass-border);
+        }
+        .tool-card:hover {
+            background: rgba(0, 243, 255, 0.05);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        .tool-card span {
+            display: block;
+            color: var(--accent);
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            font-family: 'Space Grotesk';
+            letter-spacing: 2px;
+        }
+        .tool-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .tool-link {
+            font-size: 0.75rem;
+            color: var(--primary);
+            word-break: break-all;
+        }
+
         /* --- Section Container --- */
         section {
             max-width: 1200px;
             margin: 0 auto;
             padding: 80px 20px;
-        }
-
-        /* --- Grid Container --- */
-        .hexagon-container { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; margin-top: 40px;
-        }
-
-        .video-card {
-            position: relative; height: 400px; transition: 0.5s ease;
-            cursor: pointer; overflow: hidden;
-        }
-
-        .video-card:hover { transform: translateY(-10px) scale(1.02); }
-        
-        .video-card video {
-            width: 100%; height: 100%; object-fit: cover;
-            border-radius: 24px; filter: grayscale(40%); transition: 0.5s;
-        }
-        
-        .video-card.active video { filter: grayscale(0%); border: 2px solid var(--accent); }
-
-        .video-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 30px; background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            border-radius: 0 0 24px 24px;
-            pointer-events: none;
         }
 
         /* --- Contact Form --- */
@@ -242,102 +362,63 @@
             header { width: 95%; }
             .nav-links { display: none; }
             .hero h1 { font-size: 3rem; }
+            .hide-mobile { display: none; }
+            .system-monitor-bar { top: 80px; font-size: 0.6rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="neural-background"></div>
+    <canvas id="matrix-canvas"></canvas>
 
     <header id="main-header" class="glass">
         <nav>
             <a href="#" class="logo">MFA.OS</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#dispatch">Dispatch</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#showcase">Portfolio</a></li>
+                <li><a href="#showcase">Archive</a></a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div style="color: var(--accent); font-size: 0.7rem; font-family: monospace;">STATUS: ONLINE</div>
+            <div style="color: var(--accent); font-size: 0.7rem; font-family: monospace;">STATUS: CONNECTED</div>
         </nav>
     </header>
 
+    <div class="system-monitor-bar glass">
+        <div class="monitor-item">
+            <span class="label">PING:</span>
+            <span id="ping-val" class="value">-- ms</span>
+        </div>
+        <div class="monitor-item">
+            <span class="label">UPTIME:</span>
+            <span id="uptime-val" class="value">00:00:00</span>
+        </div>
+        <div class="monitor-item">
+            <span class="label">IP_ADDR:</span>
+            <span id="ip-val" class="value">DETECTING...</span>
+        </div>
+        <div class="monitor-item hide-mobile">
+            <span class="label">LOC:</span>
+            <span id="loc-val" class="value">SEARCHING...</span>
+        </div>
+    </div>
+
     <section class="hero" id="home">
         <div class="photo-container" style="margin-bottom: 30px; position: relative;">
-            <div class="photo-frame" style="
-                width: 150px; 
-                height: 200px; 
-                border-radius: 15px; 
-                border: 2px solid var(--accent); 
-                padding: 5px; 
-                background: var(--glass-bg);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto;
-            ">
-                <img src="foto-anda.jpg" alt="Muhammad Fatkhul Amin" style="
-                    width: 100%; 
-                    height: 100%; 
-                    object-fit: cover; 
-                    border-radius: 10px;
-                    filter: contrast(1.1) brightness(1.1);
-                ">
+            <div class="photo-frame" style="wth: 150px; height: 200px; border-radius: 15px; border: 2px solid var(--accent); padding: 5px; background: var(--glass-bg); backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); overflow: hidden; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <img src="foto-anda.jpg" alt="Muhammad Fatkhul Amin" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; filter: contrast(1.1) brightness(1.1);">
             </div>
-            <div style="
-                position: absolute; 
-                top: 0; left: 50%; 
-                transform: translateX(-50%); 
-                width: 160px; height: 2px; 
-                background: var(--accent); 
-                box-shadow: 0 0 15px var(--accent);
-                animation: scan 3s ease-in-out infinite;
-                z-index: 2;
-            "></div>
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 160px; height: 2px; background: var(--accent); box-shadow: 0 0 15px var(--accent); animation: scan 3s ease-in-out infinite; z-index: 2;"></div>
         </div>
 
         <div class="hero-tag">Creative Developer & Designer</div>
-        
         <h1>MUHAMMAD<br>FATKHUL AMIN</h1>
-        
-        <p style="max-width: 600px; margin-bottom: 20px; color: rgba(255,255,255,0.6); font-weight: 300; line-height: 1.6;">
-            Professional <strong>Job Position</strong> with ID: 00.112.22.333. Specialized in creating visual identities and digital experiences with a focus on innovative results.
+        <p style="max-width: 600px; margin-bottom: 20px; color: rgba(255,255,255,0.6); font-weight: 300; line-height: 1.6;" >TJKT Student & Creative Developer. Bridging technical infrastructure with innovative visual design.
         </p>
-
-        <div class="info-grid" id="about">
-            <div class="info-card glass">
-                <h3>PERSONAL DETAILS</h3>
-                <p><strong>Employee ID:</strong> 00.112.22.333</p>
-                <p><strong>Date of Birth:</strong> 02 / 06 / 2023</p>
-                <p><strong>Phone:</strong> (+00.123.456.789)</p>
-                
-                <h3 style="margin-top: 25px;">SKILLS & EXPERTISE</h3>
-                <div class="skill-bar-container">
-                    <div class="skill-label"><span>Web Desain</span><span>90%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
-                </div>
-                <div class="skill-bar-container">
-                    <div class="skill-label"><span>Desain Grafis</span><span>95%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
-                </div>
-            </div>
-
-            <div class="info-card glass">
-                <h3>TERMS & CONDITIONS</h3>
-                <p style="font-size: 0.85rem; margin-bottom: 12px;">• Employees are required to use the card while on duty.</p>
-                <p style="font-size: 0.85rem; margin-bottom: 12px;">• If the card is lost or damaged, an additional fee will be charged according to regulations.</p>
-                <p style="font-size: 0.85rem;">• If you find this card, please contact the number listed on the profile.</p>
-                
-                <h3 style="margin-top: 25px;">VALIDITY</h3>
-                <p><strong>Issue Date:</strong> 31/10/23</p>
-                <p><strong>Expiry Date:</strong> 12/01/26</p>
-            </div>
-        </div>
         
-        <a href="#showcase" class="cta-button">VIEW MY WORK</a>
+        <a href="#about" class="cta-button">ACCESS DATA PROFILE</a>
 
         <style>
             @keyframes scan {
@@ -347,56 +428,194 @@
         </style>
     </section>
 
+    <section id="about">
+        <div class="info-card glass" style="position: relative; overflow: hidden; border-left: 3px solid var(--secondary); transition: 0.4s;">
+    
+    <div class="glitch-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 1;"></div>
 
-    <section id="showcase">
-    <div style="margin-bottom: 60px;">
-        <h2 style="font-family: 'Space Grotesk'; font-size: 2.5rem; letter-spacing: -1px;">PROJECT ARCHIVE</h2>
-        <div style="width: 50px; height: 4px; background: var(--accent); margin-top: 10px;"></div>
+    <div style="position: absolute; top: 10px; right: -25px; transform: rotate(45deg); background: var(--secondary); color: #000; font-size: 0.6rem; font-weight: bold; padding: 5px 30px; letter-spacing: 2px; font-family: monospace; z-index: 5; box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);">
+        RESTRICTED
     </div>
 
-    <div class="music-player glass" id="musicPlayer">
-        <button class="play-btn" id="playBtn">
-            <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <div class="track-info">
-            <div class="track-name">· LUZ ROJA ·</div>
-            <div class="audio-visualizer">
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <h3 style="color: var(--accent); border-bottom: 1px solid rgba(0, 243, 255, 0.2); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; position: relative; z-index: 2;">
+        <span class="blink-dot" style="background: var(--accent); box-shadow: 0 0 10px var(--accent);"></span> SUBJECT_IDENT//
+    </h3>
+
+    <div style="margin-top: 25px; font-family: monospace; font-size: 0.85rem; line-height: 2.3; position: relative; z-index: 2;">
+        
+        <p><span style="opacity: 0.4;">NAME:</span> M. F██████ A███</p>
+        
+        <p><span style="opacity: 0.4;">ORG:</span> SMKS-H // <span style="background: rgba(255,105,180,0.15); color: var(--secondary); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255,105,180,0.3); font-size: 0.75rem;">TJKT-DIV</span></p>
+        
+        <p style="display: flex; align-items: center; gap: 10px;">
+            <span style="opacity: 0.4;">NET_AUTH:</span> 
+            <span style="color: var(--accent); letter-spacing: 2px; text-shadow: 0 0 5px var(--accent);">[ ██████████ ]</span>
+            <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">98.2%</span>
+        </p>
+        
+        <p style="display: flex; align-items: center; gap: 10px; overflow: hidden; height: 1.2rem;">
+            <span style="opacity: 0.4;">DATA_STRM:</span> 
+            <span class="glitch-text" style="color: var(--primary); font-size: 0.75rem; white-space: nowrap; animation: dataStream 5s linear infinite;">
+                01101001 01101110 01100110 01101111 // 0x4A 0x45 0x50 0x41 0x52 0x41 // A5 
+            </span>
+        </p>
+        
+        <p><span style="opacity: 0.4;">STATUS:</span> <span style="color: var(--accent); font-weight: bold; animation: pulseText 2s infinite;">ENCRYPTED_NODE</span></p>
+    </div>
+    
+    <div style="margin-top: 25px; border-top: 1px dashed var(--glass-border); padding-top: 15px; font-size: 0.65rem; font-family: monospace; display: flex; justify-content: space-between; align-items: center; opacity: 0.6; position: relative; z-index: 2;">
+        <span>SYSTEM_SECURED::AES-256</span>
+        <span style="color: var(--accent);">[ACTIVE]</span>
+    </div>
+</div>
+
+<style>
+    /* Hover Effect untuk Card */
+    .info-card.glass:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    }
+    .info-card.glass:hover .glitch-overlay {
+        opacity: 1;
+    }
+
+    /* Animasi Binary Data Stream */
+    @keyframes dataStream {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* Animasi Pulse untuk Teks Status */
+    @keyframes pulseText {
+        0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--accent); }
+        50% { opacity: 0.5; text-shadow: 0 0 2px var(--accent); }
+    }
+</style>
+
+
+        <div class="gif-display-container" style="margin: 0 auto;">
+            <div class="gif-frame glass">
+                <img src="animasi.gif" alt="Project Preview Animation">
+            </div>
+            <div class="gif-caption">GAMBARAN KETIKA TIDAK BELAJAR DARI KESALAHAN</div>
+        </div>
+
+        <div id="dispatch" style="padding: 20px 0; max-width: 1000px; margin: 0 auto;">
+            <div class="glass" style="padding: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; margin-bottom: 30px;">
+                    <div>
+                        <h2 style="font-family: 'Space Grotesk'; color: var(--accent); font-size: 1.5rem;">CH.log🔍</h2>
+                        <p style="font-size: 0.7rem; color: rgba(255,255,255,0.5); font-family: monospace;">ACCESSING SECURE NEWS FEED...</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="blink-dot"></span>
+                        <span style="font-size: 0.7rem; font-family: monospace; color: var(--accent);"></span>
+                    </div>
+                </div>
+                <div class="dispatch-feed">
+                    <div class="news-item">
+                        <span class="news-tag">[ 14:09 WIB - OPINION ]</span>
+                        <h3 style="font-family: 'Space Grotesk'; margin-bottom: 10px;">Tantangan dari MBG</h3></h3>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                            Antara perut rakyat dan kantong pejabat, negara sibuk menghitung gizi, tapi oknum sibuk menghitung komisi. Ini soal para oknum pengelola yang ingin mendapatkan fee dari MBG.
+                        </p>
+                    </div>
+                <div class="dispatch-feed">
+                    <div class="news-item">
+                        <span class="news-tag">[ 11:30 WIB - OPINION ]</span>
+                        <h3 style="font-family: 'Space Grotesk'; margin-bottom: 10px;">Mbah Najih Begitu Dihormati di Kalangan Santri</h3></h3>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                            Bagaimana mungkin seseorang yang (dianggap) tidak memiliki latar belakang keilmuan pesantren yang mendalam, berani menyimpulkan aqidah seorang ulama sepuh?
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <a href="#" style="color: var(--primary); font-size: 0.75rem; text-decoration: none; font-family: monospace; letter-spacing: 2px;">VIEW_ALL_ARCHIVES_</a>
+                </div>
             </div>
         </div>
-        <audio id="bgMusic" loop>
-            <source src="musik.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+    </section>
 
-    <div class="glass" style="padding: 60px 20px; text-align: center; border-style: dashed; border-width: 2px;">
-        <div style="margin-bottom: 30px;">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="floating-icon">
-                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
-                <line x1="7" y1="2" x2="7" y2="22"></line>
-                <line x1="17" y1="2" x2="17" y2="22"></line>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <line x1="2" y1="7" x2="7" y2="7"></line>
-                <line x1="2" y1="17" x2="7" y2="17"></line>
-                <line x1="17" y1="17" x2="22" y2="17"></line>
-                <line x1="17" y1="7" x2="22" y2="7"></line>
-            </svg>
+    <section id="showcase">
+        <div style="margin-bottom: 60px;">
+            <h2 style="font-family: 'Space Grotesk'; font-size: 2.5rem; letter-spacing: -1px;">PROJECT ARCHIVE</h2>
+            <div style="width: 50px; height: 4px; background: var(--accent); margin-top: 10px;"></div>
         </div>
-        <h3 style="font-family: 'Space Grotesk'; margin-bottom: 15px; font-size: 1.8rem;">VIDEO SHOWREEL</h3>
-        <p style="color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 30px;">Klik tombol di bawah untuk melihat koleksi lengkap karya video dan motion design saya di halaman khusus.</p>
-        
-        <a href="portfolio-video.html" class="cta-button">BUKA GALERI VIDEO</a>
-    </div>
-</section>
 
+        <div class="music-player glass" id="musicPlayer">
+            <button class="play-btn" id="playBtn">
+                <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="track-info">
+                <div class="track-name">· LUZ ROJA ·</div>
+                <div class="audio-visualizer">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+            <audio id="bgMusic" loop>
+                <source src="musik.opus" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div style="margin: 40px 0 20px;">
+            <h3 style="font-family: 'Space Grotesk'; font-size: 1.2rem; color: var(--primary); letter-spacing: 3px; text-transform: uppercase;">Security Toolkit</h3>
+        </div>
+
+        <div class="tools-grid">
+            <a href="https://www.metasploit.com/" target="_blank" class="tool-card glass">
+                <span>01. FRAMEWORK</span>
+                <h4>Metasploit</h4>
+                <div class="tool-link">metasploit.com</div>
+            </a>
+            <a href="https://wazuh.com/" target="_blank" class="tool-card glass">
+                <span>02. SIEM/XDR</span>
+                <h4>Wazuh</h4>
+                <div class="tool-link">wazuh.com</div>
+            </a>
+            <a href="https://nmap.org/" target="_blank" class="tool-card glass">
+                <span>03. SCANNER</span>
+                <h4>Nmap</h4>
+                <div class="tool-link">nmap.org</div>
+            </a>
+            <a href="https://www.wireshark.org/" target="_blank" class="tool-card glass">
+                <span>04. ANALYZER</span>
+                <h4>Wireshark</h4>
+                <div class="tool-link">wireshark.org</div>
+            </a>
+            <a href="https://portswigger.net/burp" target="_blank" class="tool-card glass">
+                <span>05. PENTEST</span>
+                <h4>Burp Suite</h4>
+                <div class="tool-link">portswigger.net</div>
+            </a>
+        </div>
+
+        <div class="glass" style="padding: 60px 20px; text-align: center; border-style: dashed; border-width: 2px;">
+            <div style="margin-bottom: 30px;">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="floating-icon">
+                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                    <line x1="7" y1="2" x2="7" y2="22"></line>
+                    <line x1="17" y1="2" x2="17" y2="22"></line>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <line x1="2" y1="7" x2="7" y2="7"></line>
+                    <line x1="2" y1="17" x2="7" y2="17"></line>
+                    <line x1="17" y1="17" x2="22" y2="17"></line>
+                    <line x1="17" y1="7" x2="22" y2="7"></line>
+                </svg>
+            </div>
+            <h3 style="font-family: 'Space Grotesk'; margin-bottom: 15px; font-size: 1.8rem;">VIDEO SHOWREEL</h3>
+            <p style="color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 30px;"></p>
+            <a href="portfolio-video.html" class="cta-button">BUKA</a>
+        </div>
+    </section>
 
     <section id="contact" style="padding-bottom: 150px;">
         <div class="contact-container">
             <div>
                 <h2 style="font-size: 3rem; font-family: 'Space Grotesk'; margin-bottom: 20px;">LET'S<br><span style="color: var(--accent);">CONNECT</span></h2>
-                <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">Tertarik untuk bekerja sama atau sekadar menyapa?</p>
+                <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">Jika ada sesuatu yang cocok untuk didiskusiakan atau dikritisi?</p>
                 <p style="color: var(--primary); font-family: monospace;">hello@reallygreatsite.com</p>
-                <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 10px;">123 Anywhere St., Any City</p>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 10px;"></p>
             </div>
             <form class="glass" style="padding: 40px;" id="whatsappForm">
                 <input type="text" id="name" placeholder="NAMA ANDA" required>
@@ -407,7 +626,77 @@
     </section>
 
     <script>
-        // Music Player Logic
+        // --- MATRIX RAIN EFFECT ---
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(5, 5, 5, 0.05)"; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00f3ff"; 
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Real-time Uptime Clock
+        let sessionSeconds = 0;
+        setInterval(() => {
+            sessionSeconds++;
+            const hrs = String(Math.floor(sessionSeconds / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((sessionSeconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(sessionSeconds % 60).padStart(2, '0');
+            document.getElementById('uptime-val').innerText = `${hrs}:${mins}:${secs}`;
+        }, 1000);
+
+        // Dynamic Ping Simulator
+        setInterval(() => {
+            const fakePing = Math.floor(Math.random() * (48 - 22 + 1)) + 22;
+            document.getElementById('ping-val').innerText = `${fakePing} ms`;
+        }, 2500);
+
+        // User IP & Location Fetcher
+        async function getVisitorData() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                document.getElementById('ip-val').innerText = data.ip || "PROTECTED";
+                document.getElementById('loc-val').innerText = data.city ? `${data.city}, ${data.country_code}` : "ENCRYPTED";
+            } catch (e) {
+                document.getElementById('ip-val').innerText = "127.0.0.1";
+                document.getElementById('loc-val').innerText = "LOCAL_HOST";
+            }
+        }
+        getVisitorData();
+
         const music = document.getElementById('bgMusic');
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -425,30 +714,6 @@
             }
         });
 
-        const vCards = document.querySelectorAll('.video-card');
-        const vElements = document.querySelectorAll('.portfolio-video');
-
-        vCards.forEach((card, index) => {
-            card.addEventListener('click', () => {
-                const video = vElements[index];
-                if (video.paused) {
-                    vElements.forEach((v, i) => {
-                        v.pause();
-                        vCards[i].classList.remove('active');
-                    });
-                    video.play();
-                    card.classList.add('active');
-                    // Matikan musik jika video dimainkan agar suara tidak tabrakan
-                    music.pause();
-                    musicPlayer.classList.remove('playing');
-                    playIcon.innerHTML = '<path d="M8 5v14l11-7z" fill="black"/>';
-                } else {
-                    video.pause();
-                    card.classList.remove('active');
-                }
-            });
-        });
-
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
             header.classList.toggle('scrolled', window.scrollY > 100);
@@ -459,25 +724,17 @@
             const size = Math.random() * 3;
             particle.style.cssText = `
                 position: fixed;
-                width: ${size}px;
-                height: ${size}px;
+                width: ${size}px; height: ${size}px;
                 background: ${Math.random() > 0.5 ? '#00f3ff' : '#e0a3ff'};
-                left: ${Math.random() * 100}vw;
-                top: 110vh;
-                opacity: ${Math.random()};
-                z-index: -1;
-                pointer-events: none;
-                border-radius: 50%;
+                left: ${Math.random() * 100}vw; top: 110vh;
+                opacity: ${Math.random()}; z-index: -1;
+                pointer-events: none; border-radius: 50%;
             `;
             document.body.appendChild(particle);
-
             particle.animate([
                 { transform: 'translateY(0)', opacity: 1 },
                 { transform: `translateY(-110vh) translateX(${Math.random() * 100 - 50}px)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 4000 + 3000,
-                easing: 'linear'
-            }).onfinish = () => particle.remove();
+            ], { duration: Math.random() * 4000 + 3000, easing: 'linear' }).onfinish = () => particle.remove();
         }
         setInterval(createParticle, 150);
 
@@ -486,7 +743,7 @@
             const nama = document.getElementById('name').value;
             const pesan = document.getElementById('message').value;
             const nomorWA = "6281392463081";
-            const teksPesan = `Halo, saya ingin bertanya.%0A%0A*Nama:* ${nama}%0A*Pesan:* ${pesan}`;
+            const teksPesan = `Halo, saya ingin bertanya.%0ANama: ${nama}%0APesan: ${pesan}`;
             const urlWA = `https://wa.me/${nomorWA}?text=${teksPesan}`;
             window.open(urlWA, '_blank');
         });
